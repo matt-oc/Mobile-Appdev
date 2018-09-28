@@ -5,9 +5,13 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_placemark.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.toast
 import org.wit.placemark.R
+import org.wit.placemark.models.PlacemarkModel
 
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
+
+  var placemark = PlacemarkModel()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -15,7 +19,13 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     info("Placemark Activity started..")
 
     btnAdd.setOnClickListener() {
-      info("add Button Pressed")
+      placemark.title = placemarkTitle.text.toString()
+      if (placemark.title.isNotEmpty()) {
+        info("add Button Pressed: $placemark")
+      }
+      else {
+        toast ("Please Enter a title")
+      }
     }
   }
 }
